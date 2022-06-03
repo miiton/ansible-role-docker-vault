@@ -16,3 +16,61 @@
     name: docker-compose-service@vault
     enabled: yes
     state: started
+
+- name: Delete caddy conf
+  uri:
+    url: http://localhost:2019/id/{{ vault_domain }}/
+    method: DELETE
+    headers:
+      Content-Type: application/json
+      Origin: http://localhost:2019
+  when: caddy_conf_test.status == 200
+
+- name: Update caddy
+  uri:
+    url: http://localhost:2019/config/apps/http/servers/{{ caddy_servername }}/routes/
+    method: POST
+    headers:
+      Content-Type: application/json
+      Origin: http://localhost:2019
+    return_content: yes
+    status_code: 200
+    body_format: json
+    body: |
+      {
+        "@id": "{{ vault_domain }}",
+        "match": [
+          {
+            "host": [
+              "{{ vault_domain }}"
+            ]
+          }
+        ],
+        "handle": [
+          {
+            "handler": "subroute",
+            "routes": [
+              {
+                "match": [
+                  {
+                    "path": [
+                      "/*"
+                    ]
+                  }
+                ],
+                "handle": [
+                  {
+                    "handler": "reverse_proxy",
+                    "upstreams": [
+                      {
+                        "dial": "vault:8200"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "terminal": true
+      }

@@ -15,5 +15,5 @@ galaxy_info:
 
 dependencies:
   - name: caddy2
-    src: git+git@github.com:miiton/ansible-role-caddy2.git
+    src: git+git@github.com:miiton/ansible-role-docker-caddy2.git
     version: main
