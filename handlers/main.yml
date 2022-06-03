@@ -1,0 +1,7 @@
+---
+- name: Restart vault
+  systemd:
+    name: docker-compose-service@vault
+    enabled: yes
+    state: restarted
+    daemon_reload: yes

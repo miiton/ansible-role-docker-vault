@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  vault:
+    image: vault
+    container_name: vault
+    networks:
+      - default
+      - proxy
+    volumes:
+      - vault:/vault/file
+    ports:
+      - 8200
+    environment:
+      VAULT_LOCAL_CONFIG: '{"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h","listener": {"tcp": {"address": "0.0.0.0:8200", "tls_disable": "true"}},"disable_clustering": true}'
+    cap_add:
+      - IPC_LOCK
+    logging:
+      options:
+        max-size: "10k"
+        max-file: "5"
+    command: ["server"]
+
+volumes:
+  vault:
+networks:
+  proxy:
+    external: true
