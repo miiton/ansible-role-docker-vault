@@ -8,8 +8,8 @@ backend "file" {
 listener "tcp" {
   address = "0.0.0.0:8200"
   tls_disable = "false"
-  tls_cert_file = "/caddy/data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.crt"
-  tls_key_file = "/caddy/data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.key"
+  tls_cert_file = "/caddy/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.crt"
+  tls_key_file = "/caddy/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.key"
 }
 
 disable_clustering = true
