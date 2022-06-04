@@ -4,16 +4,16 @@ galaxy_info:
   description: Setup HashiCorp Vault on docker
   company: "miiton"
   license: "MIT"
-  min_ansible_version: 2.12
+  min_ansible_version: "2.9"
   platforms:
     - name: Ubuntu
       versions:
-        - 20.04
-        - 22.04
+        - focal
+        - jammy
   galaxy_tags:
     - security
 
 dependencies:
-  - name: caddy2
+  - name: docker-caddy2
     src: git+git@github.com:miiton/ansible-role-docker-caddy2.git
     version: main
