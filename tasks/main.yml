@@ -72,7 +72,7 @@
                     "handler": "reverse_proxy",
                     "upstreams": [
                       {
-                        "dial": "vault:8200"
+                        "dial": "https://vault:8200"
                       }
                     ]
                   }

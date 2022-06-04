@@ -10,7 +10,7 @@ services:
     volumes:
       - vault:/vault
       - /etc/vault/config.hcl:/vault/config/config.hcl
-      - caddy:/caddy
+      - caddy:/caddy:ro
     ports:
       - 8200
     cap_add:
