@@ -8,11 +8,11 @@ services:
       - default
       - proxy
     volumes:
-      - vault:/vault/file
+      - vault:/vault
+      - /etc/vault/config.hcl:/vault/config/config.hcl
+      - caddy:/caddy
     ports:
       - 8200
-    environment:
-      VAULT_LOCAL_CONFIG: '{"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h","listener": {"tcp": {"address": "0.0.0.0:8200", "tls_disable": "true"}},"disable_clustering": true}'
     cap_add:
       - IPC_LOCK
     logging:
@@ -23,6 +23,8 @@ services:
 
 volumes:
   vault:
+  caddy:
+    external: true
 networks:
   proxy:
     external: true

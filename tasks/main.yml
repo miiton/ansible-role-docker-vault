@@ -11,6 +11,12 @@
     dest: /opt/docker-compose-service/vault/docker-compose.yml
   notify: Restart vault
 
+- name: Put config.hcl
+  template:
+    src: config.hcl.js
+    dest: /etc/vault/config.hcl
+  notify: Restart vault
+
 - name: Start vault
   systemd:
     name: docker-compose-service@vault
@@ -19,7 +25,7 @@
 
 - name: Delete caddy conf
   uri:
-    url: http://localhost:2019/id/{{ vault_domain }}/
+    url: http://localhost:2019/id/{{ vault_host }}/
     method: DELETE
     status_code: "200,404"
     headers:
@@ -38,11 +44,11 @@
     body_format: json
     body: |
       {
-        "@id": "{{ vault_domain }}",
+        "@id": "{{ vault_host }}",
         "match": [
           {
             "host": [
-              "{{ vault_domain }}"
+              "{{ vault_host }}"
             ]
           }
         ],
