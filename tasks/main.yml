@@ -1,9 +1,12 @@
 ---
-- name: Create compose directory
+- name: Create directories
   file:
     state: directory
-    path: /opt/docker-compose-service/vault
+    path: "{{ item }}"
     mode: 0755
+  with_items:
+    - /opt/docker-compose-service/vault
+    - /etc/vault
 
 - name: Put docker-compose.yml
   copy:
