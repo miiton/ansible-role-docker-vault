@@ -14,6 +14,6 @@ galaxy_info:
     - security
 
 dependencies:
-  - name: docker-caddy2
-    src: git+git@github.com:miiton/ansible-role-docker-caddy2.git
+  - name: docker-caddy
+    src: git+git@github.com:miiton/ansible-role-docker-caddy.git
     version: main
