@@ -70,9 +70,15 @@
                 "handle": [
                   {
                     "handler": "reverse_proxy",
+                    "transport": {
+                      "protocol": "http",
+                      "tls": {
+                        "server_name": "{{ vault_host }}"
+                      }
+                    },
                     "upstreams": [
                       {
-                        "dial": "https://vault:8200"
+                        "dial": "vault:8200"
                       }
                     ]
                   }
