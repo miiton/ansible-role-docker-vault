@@ -2,7 +2,7 @@
 - name: Change permission certdir
   community.docker.docker_container_exec:
     container: caddy
-    command: chmod -R 755 /caddy/caddy/certificates
+    command: chmod -R 755 /data/caddy/certificates
 
 - name: Create directories
   file:
