@@ -15,10 +15,20 @@ services:
       - 8200
     cap_add:
       - IPC_LOCK
+{% if loki_host == "" %}
     logging:
       options:
         max-size: "10k"
         max-file: "5"
+{% else %}
+    logging:
+      driver: loki
+      options:
+        loki-url: https://{{ loki_host }}/loki/api/v1/push
+        loki-tenant-id: {{ loki_tenant_id }}
+        max-size: "10k"
+        max-file: "5"
+{% endif %}
     command: ["server"]
 
 volumes:

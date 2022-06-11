@@ -14,8 +14,8 @@
     - /etc/vault
 
 - name: Put docker-compose.yml
-  copy:
-    src: docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
     dest: /opt/docker-compose-service/vault/docker-compose.yml
   notify: Restart vault
 
