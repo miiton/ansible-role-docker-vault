@@ -7,6 +7,7 @@ services:
     networks:
       - default
       - proxy
+      - prometheus-network
     volumes:
       - vault:/vault
       - /etc/vault/config.hcl:/vault/config/config.hcl
@@ -37,4 +38,6 @@ volumes:
     external: true
 networks:
   proxy:
+    external: true
+  prometheus-network:
     external: true
