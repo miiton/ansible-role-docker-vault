@@ -13,3 +13,8 @@ listener "tcp" {
 }
 
 disable_clustering = true
+
+telemetry {
+  disable_hostname = true
+  prometheus_retention_time = "12h"
+}
