@@ -12,6 +12,7 @@ listener "tcp" {
   tls_key_file = "/caddy/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.key"
 }
 
+api_addr = "https://{{ vault_host }}/"
 disable_clustering = true
 
 telemetry {

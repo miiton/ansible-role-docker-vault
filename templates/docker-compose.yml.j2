@@ -9,7 +9,7 @@ services:
       - proxy
       - prometheus-network
     volumes:
-      - vault:/vault
+      - vault:/vault/file
       - /etc/vault/config.hcl:/vault/config/config.hcl
       - caddy:/caddy:ro
     ports:
