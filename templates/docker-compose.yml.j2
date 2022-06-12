@@ -5,9 +5,11 @@ services:
     image: vault
     container_name: vault
     networks:
-      - default
-      - proxy
-      - prometheus-network
+      default:
+      proxy:
+      prometheus-network:
+        aliases:
+          - {{ vault_host }}
     volumes:
       - vault:/vault/file
       - /etc/vault/config.hcl:/vault/config/config.hcl
