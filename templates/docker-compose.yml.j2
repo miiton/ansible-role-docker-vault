@@ -19,7 +19,6 @@ services:
       - /etc/vault/credentials.json:/credentials.json
 {%   endif %}
 {% endif %}
-      - /etc/vault/config.hcl:/vault/config/config.hcl
     ports:
       - 8200
     cap_add:
