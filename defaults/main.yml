@@ -1,3 +1,4 @@
 vault_storage: file  # file, gcs, s3
 vault_storage_bucket: hogehogevault
 vault_unuse_iam: false  # if true use credentials.json or environment variant
+vault_x_forwarded_for_authorized_addrs: 0.0.0.0/0
