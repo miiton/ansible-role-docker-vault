@@ -21,8 +21,12 @@ telemetry {
 storage "file" {
   path = "/vault/file"
 }
-{% else if vault_storage == "gcs" %}
+{% elif vault_storage == "gcs" %}
 storage "gcs" {
+  bucket = "{{ vault_storage_bucket }}"
+}
+{% elif vault_storage == "s3" %}
+storage "s3" {
   bucket = "{{ vault_storage_bucket }}"
 }
 {% endif %}
