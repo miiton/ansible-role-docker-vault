@@ -45,6 +45,7 @@ services:
 {%   else if vault_storage == "s3" %}
       AWS_ACCESS_KEY_ID: {{ lookup('env', 'AWS_ACCESS_KEY_ID') }}
       AWS_SECRET_ACCESS_KEY:  {{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}
+{%   endif %}
 {% endif %}
     command: ["server"]
 
