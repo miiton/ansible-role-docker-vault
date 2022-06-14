@@ -4,6 +4,14 @@
     container: caddy
     command: chmod -R 755 /data/caddy/certificates
 
+- name: Put GCP credentials.json
+  copy:
+    src: credentials.json
+    dest: /etc/loki/credentials.json
+    mode: 0600
+  notify: Restart loki
+  when: vault_unuse_iam == true and vault_storage == "gcs"
+
 - name: Create directories
   file:
     state: directory
@@ -17,6 +25,7 @@
   template:
     src: docker-compose.yml.j2
     dest: /opt/docker-compose-service/vault/docker-compose.yml
+    mode: 0700
   notify: Restart vault
 
 - name: Put config.hcl
