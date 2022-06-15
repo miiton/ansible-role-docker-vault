@@ -21,6 +21,7 @@ services:
 {% endif %}
     ports:
       - 8200
+      - 8125
     cap_add:
       - IPC_LOCK
 {% if loki_host == "" %}

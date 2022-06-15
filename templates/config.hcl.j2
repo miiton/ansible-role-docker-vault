@@ -8,14 +8,18 @@ listener "tcp" {
   tls_cert_file = "/caddy/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.crt"
   tls_key_file = "/caddy/caddy/certificates/acme-v02.api.letsencrypt.org-directory/{{ vault_host }}/{{ vault_host }}.key"
   x_forwarded_for_authorized_addrs = "{{ vault_x_forwarded_for_authorized_addrs }}"
+  telemetry {
+    unauthenticated_metrics_access = true
+  }
 }
 
 api_addr = "https://{{ vault_host }}/"
 disable_clustering = true
 
 telemetry {
+  statsite_address = "{{ vault_host }}:8125"
   disable_hostname = true
-  prometheus_retention_time = "12h"
+  prometheus_retention_time = "30s"
 }
 
 {% if vault_storage == "file" %}
@@ -29,5 +33,6 @@ storage "gcs" {
 {% elif vault_storage == "s3" %}
 storage "s3" {
   bucket = "{{ vault_storage_bucket }}"
+  region = "{{ vault_storage_region }}"
 }
 {% endif %}
