@@ -28,10 +28,12 @@ storage "file" {
 {% elif vault_storage == "gcs" %}
 storage "gcs" {
   bucket = "{{ vault_storage_bucket }}"
+  max_parallel = {{ vault_storage_max_parallel }}
 }
 {% elif vault_storage == "s3" %}
 storage "s3" {
   bucket = "{{ vault_storage_bucket }}"
   region = "{{ vault_storage_region }}"
+  max_parallel = "{{ vault_storage_max_parallel }}"
 }
 {% endif %}
